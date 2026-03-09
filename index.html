@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yandere OS - Rivals Database (FINAL STABLE)</title>
+    <style>
+        /* Paleta de Colores Rosa Suturada y Cute */
+        :root {
+            --win-pink-bg: #ffc0cb; /* Fondo de pantalla */
+            --win-pink-face: #ffb7d5; /* Cara de la ventana */
+            --win-pink-light: #ffe4f0; /* Brillo de bordes */
+            --win-pink-dark: #d880a6; /* Sombras de bordes */
+            --win-pink-accent: #ff69b4; /* Títulos y acentos */
+            --text-dark: #700030;
+        }
+
+        body {
+            /* Mantenemos fondo.png si lo tienes, si no, usa el color rosa */
+            background: linear-gradient(rgba(255, 192, 203, 0.5), rgba(255, 192, 203, 0.5)), url('fondo.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: var(--win-pink-bg);
+            font-family: "MS Sans Serif", Tahoma, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            color: var(--text-dark);
+        }
+
+        .desktop-frame {
+            width: 950px;
+            background-color: var(--win-pink-face);
+            border: 3px solid;
+            border-color: var(--win-pink-light) var(--win-pink-dark) var(--win-pink-dark) var(--win-pink-light);
+            padding: 4px;
+            box-shadow: 10px 10px 40px rgba(216, 128, 166, 0.8);
+        }
+
+        /* Barra de Título Rosa Fucsia */
+        .title-bar {
+            background: linear-gradient(90deg, #ff1493, #ff69b4);
+            padding: 4px 8px;
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            text-shadow: 1px 1px #000;
+            border: 1px solid #ffdae9;
+        }
+
+        .title-btns button {
+            width: 18px; height: 16px;
+            background: var(--win-pink-face);
+            border: 1.5px solid;
+            border-color: #fff #000 #000 #fff;
+            padding: 0; font-size: 10px; cursor: pointer;
+            color: #000;
+        }
+
+        /* Banner Rosa */
+        .pc-banner {
+            border: 2px inset var(--win-pink-dark);
+            height: 180px;
+            margin: 10px 0;
+            background-color: #fff;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .pc-banner img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Contenedor de Perfiles Super Cute */
+        .profiles-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .window-pane {
+            border: 2px solid;
+            border-color: var(--win-pink-dark) var(--win-pink-light) var(--win-pink-light) var(--win-pink-dark);
+            background: var(--win-pink-light);
+            padding: 2px;
+        }
+
+        .pane-header { 
+            background: var(--win-pink-accent); 
+            color: white; padding: 3px 10px; 
+            font-size: 11px; font-weight: bold; 
+            border: 1px solid #fff;
+        }
+
+        .pane-content { padding: 10px; }
+
+        .avatar-frame {
+            width: 90px; height: 90px;
+            border: 3px inset var(--win-pink-face);
+            float: left; margin-right: 12px;
+            overflow: hidden; background: #fff;
+        }
+        /* img1.png y img2.png deben ser rosas/cutes si quieres que combinen */
+        .avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        .terminal-text {
+            background: #4d0026; /* Fondo cereza oscuro */
+            color: #ffb7d5; /* Texto rosa pastel */
+            padding: 10px; border: 2px inset #ff1493;
+            font-family: 'Courier New', monospace; font-size: 11px;
+            margin-top: 10px; clear: both;
+            box-shadow: 2px 2px 0 #ffdae9;
+        }
+
+        /* Tira de imágenes 3, 4 y 5 */
+        .image-strip { 
+            display: grid; grid-template-columns: 1fr 1fr 1fr; 
+            gap: 10px; margin: 15px 0; 
+        }
+        .strip-img-box {
+            background: #000; height: 120px; 
+            border: 2px inset var(--win-pink-dark);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .strip-img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Tabla de Rivals - ESTILO TIERLIST ROSA */
+        .data-table-container {
+            background: #fff; 
+            border: 3px inset var(--win-pink-dark);
+            max-height: 450px; overflow-y: auto;
+        }
+
+        table { width: 100%; border-collapse: collapse; font-size: 11px; }
+        th {
+            background: var(--win-pink-accent); 
+            border: 2px outset var(--win-pink-light);
+            padding: 8px; position: sticky; top: 0; z-index: 20; 
+            color: white; text-shadow: 1px 1px #700030;
+        }
+        td { border: 1px solid #ffdae9; padding: 10px; text-align: left; background: #fffafc; }
+
+        .char-cell { position: relative; text-align: center; width: 60px; }
+
+        /* ICONOS DE RIVALES (ENLACES OFICIALES) */
+        .char-icon {
+            width: 55px; height: 55px;
+            border: 2px solid #ff1493;
+            border-radius: 8px;
+            background: #ffe4f0;
+            padding: 2px;
+            box-shadow: 2px 2px 0 #d880a6;
+        }
+
+        /* ELIMINADO EL EFECTO DE HOVER ESTILO STEAM */
+        /* Las imágenes ahora son estáticas y visibles */
+
+        /* Video de YouTube */
+        .window-pane[style*="margin-top: 15px"] .pane-content { background: #000; padding: 2px; }
+
+        /* Barra de Tareas Rosa */
+        .taskbar {
+            background: var(--win-pink-face); border-top: 2px solid var(--win-pink-light);
+            padding: 3px; display: flex; gap: 5px; margin-top: 10px; align-items: center;
+            box-shadow: 0 -2px 5px rgba(216, 128, 166, 0.3);
+        }
+        .start-button { 
+            background: #ff1493; color: white; border: 2px outset #ffdae9; 
+            padding: 2px 15px; font-weight: bold; cursor: pointer; 
+            font-size: 12px; text-shadow: 1px 1px #000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="desktop-frame">
+    <div class="title-bar">
+        <span>C:\SYSTEM\YANDERE_RIVALS_FINAL.EXE ♡</span>
+        <div class="title-btns"><button>_</button><button>□</button><button>X</button></div>
+    </div>
+
+    <div class="pc-banner">
+        <img src="banner.png" alt="BANNER" onerror="this.src='https://via.placeholder.com/900x180/ffb7d5/ffffff?text=YANDERE+OS+V2.0'">
+    </div>
+
+    <div class="profiles-container">
+        <div class="window-pane">
+            <div class="pane-header">SENA_INFO.LOG</div>
+            <div class="pane-content">
+                <div class="avatar-frame"><img src="img1.png" onerror="this.src='https://api.dicebear.com/7.x/pixel-art/svg?seed=Ayano&backgroundColor=ffb7d5'"></div>
+                <strong style="color: #d1126d; font-size: 14px;">INFO_CHAN</strong>
+                <div class="terminal-text">> STATUS: ONLINE<br>> LOG: MONITORING_RIVALS<br>> IMAGES: STABLE_BUILD</div>
+            </div>
+        </div>
+        <div class="window-pane">
+            <div class="pane-header">AYANO_AISHI.LOG</div>
+            <div class="pane-content">
+                <div class="avatar-frame"><img src="img2.png" onerror="this.src='https://api.dicebear.com/7.x/pixel-art/svg?seed=Yandere&backgroundColor=ff69b4'"></div>
+                <strong style="color: #d1126d; font-size: 14px;">YAN_CHAN</strong>
+                <div class="terminal-text">> SEMPAI: OBSERVED<br>> EMOTION: CUTE_OVERLOAD<br>> ♡ ♡ ♡</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="image-strip">
+        <div class="window-pane">
+            <div class="pane-header">IMG_03.PNG</div>
+            <div class="strip-img-box">
+                <img src="img3.png" onerror="this.src='https://via.placeholder.com/200x120/ff69b4/ffffff?text=CUTE_IMG_3'">
+            </div>
+        </div>
+        <div class="window-pane">
+            <div class="pane-header">IMG_04.PNG</div>
+            <div class="strip-img-box">
+                <img src="img4.png" onerror="this.src='https://via.placeholder.com/200x120/ff69b4/ffffff?text=CUTE_IMG_4'">
+            </div>
+        </div>
+        <div class="window-pane">
+            <div class="pane-header">IMG_05.PNG</div>
+            <div class="strip-img-box">
+                <img src="img5.png" onerror="this.src='https://via.placeholder.com/200x120/ff69b4/ffffff?text=CUTE_IMG_5'">
+            </div>
+        </div>
+    </div>
+
+    <div class="window-pane">
+        <div class="pane-header">RIVAL_DATABASE_STABLE_V4</div>
+        <div class="data-table-container">
+            <table>
+                <thead>
+                    <tr><th>WEEK</th><th>ICON</th><th>NAME</th><th>DETAILED_REPORT</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01</td>
+                        <td class="char-cell">
+                            <img src="https://yandere-simulator.com/img/rivals/osana.png" class="char-icon">
+                        </td>
+                        <td><b style="color: #ff1493;">Osana Najimi</b></td>
+                        <td>Amiga de la infancia de Senpai. Tsundere clásica. Secreto: Es víctima de un acosador en línea.</td>
+                    </tr>
+                    <tr>
+                        <td>02</td>
+                        <td class="char-cell">
+                            <img src="https://yandere-simulator.com/img/rivals/amai.png" class="char-icon">
+                        </td>
+                        <td><b style="color: #ff1493;">Amai Odayaka</b></td>
+                        <td>Presidenta del club de cocina. Dulce y amable. Busca conquistar a Senpai a través de su estómago.</td>
+                    </tr>
+                    <tr>
+                        <td>03</td>
+                        <td class="char-cell">
+                            <img src="https://yandere-simulator.com/img/rivals/kizana.png" class="char-icon">
+                        </td>
+                        <td><b style="color: #ff1493;">Kizana Sunobu</b></td>
+                        <td>Presidenta del club de drama. Arrogante y dramática. Desea a Senpai para su obra de Romeo y Julieta.</td>
+                    </tr>
+                    <tr>
+                        <td>04</td>
+                        <td class="char-cell">
+                            <img src="https://yandere-simulator.com/img/rivals/oka.png" class="char-icon">
+                        </td>
+                        <td><b style="color: #ff1493;">Oka Ruto</b></td>
+                        <td>Fundadora del club de ocultismo. Sombría y tímida. Cree que Senpai tiene un aura sobrenatural.</td>
+                    </tr>
+                    <tr>
+                        <td>05</td>
+                        <td class="char-cell">
+                            <img src="https://yandere-simulator.com/img/rivals/asu.png" class="char-icon">
+                        </td>
+                        <td><b style="color: #ff1493;">Asu Rito</b></td>
+                        <td>Presidenta del club de deportes. Energética y competitiva. Entrena con Senpai para las olimpiadas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="window-pane" style="margin-top: 15px;">
+        <div class="pane-header">RIVAL_INTRO.AVI</div>
+        <div class="pane-content">
+            <div style="border: 3px inset #ff1493; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+                <iframe src="https://www.youtube.com/embed/S_7hP-p7oV4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="taskbar">
+        <div class="start-button">Start</div>
+        <div style="border: 2px inset var(--win-pink-dark); flex-grow: 1; padding: 2px 10px; font-size: 11px; color: #700030;">
+            <marquee scrollamount="2">YANDERE_OS V.2.0 - OBSESSING OVER SEMPAI... RIVALS_DETECTION_STABLE... ♡ ♡ ♡</marquee>
+        </div>
+        <div style="border: 2px inset var(--win-pink-dark); padding: 2px 8px; font-size: 11px;">04:44 PM</div>
+    </div>
+</div>
+
+</body>
+</html>
